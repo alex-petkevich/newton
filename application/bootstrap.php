@@ -80,7 +80,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/',
+	'base_url' => '', 'index_file' => ''
 ));
 
 /**
@@ -112,12 +112,19 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+Route::set('backend_user', 'backend/user/login')
+    ->defaults(array(
+        'directory'  => 'backend',
+        'controller' => 'user',
+        'action'     => 'login',
+    ));
+
 Route::set('backend', 'backend(/<controller>(/<action>(/<id>)))')
-	->defaults(array(
-		'directory'  => 'backend',
-		'controller' => 'main',
-		'action'     => 'index',
-	));
+    ->defaults(array(
+        'directory'  => 'backend',
+        'controller' => 'main',
+        'action'     => 'index',
+    ));
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(

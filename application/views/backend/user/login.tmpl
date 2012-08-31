@@ -1,0 +1,7 @@
+{extends file='../backend.tmpl'}
+
+{block name='content'}
+   username: {Form::input('username', $User->username)} <br />
+   password: {Form::input('password', '')} <br />
+   {Form::submit('::Login::')}
+{/block}
