@@ -4,7 +4,6 @@ class Controller_Backend_User extends Controller_Backend_Backend {
 
     public function action_login() {
         
-        $this->template->content = 'trying to login';
     }
     
 }

@@ -4,6 +4,7 @@ class Controller_Backend_Backend extends Controller_Template {
     
     public $template = 'backend';
     public $auto_render = FALSE;
+    public $CURRENT_URL = "";
 
     public function before() {
         parent::before();

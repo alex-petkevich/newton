@@ -1,7 +1,20 @@
 {extends file='../backend.tmpl'}
 
 {block name='content'}
-   username: {Form::input('username', $User->username)} <br />
-   password: {Form::input('password', '')} <br />
-   {Form::submit('::Login::')}
+    <div id="box">
+    <h3>Login</h3>
+
+	<form name="formLogin" method="post" id="form" action="{URL::site('backend/user/login')}">
+	    <fieldset id="personal">
+	        <legend>INPUT LOGIN INFO</legend>
+	           <label for="username">username:</label>
+	           {Form::input('username', '')} <br />
+               <label for="password">password:</label>
+	           {Form::input('password', '')} <br />
+	           <div align="center">
+	               {Form::submit('login','::Login::')}
+	           </div>
+	</form>
+	
+	</div>
 {/block}
