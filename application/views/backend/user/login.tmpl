@@ -4,15 +4,15 @@
     <div id="box">
     <h3>Login</h3>
 
-	<form name="formLogin" method="post" id="form" action="{URL::site('backend/user/login')}">
+	<form name="formLogin" method="post" class="form" action="{URL::site('backend/user/login')}">
 	    <fieldset id="personal">
 	        <legend>INPUT LOGIN INFO</legend>
 	           <label for="username">username:</label>
-	           {Form::input('username', '')} <br />
+	           <input type="text" name="username" value="" id="username" /> <br />
                <label for="password">password:</label>
-	           {Form::input('password', '')} <br />
+               <input type="password" name="password" value="" id="password" /> <br />
 	           <div align="center">
-	               {Form::submit('login','::Login::')}
+                   <input type="Submit" name="subm" value="Login" /> <br />
 	           </div>
 	</form>
 	
