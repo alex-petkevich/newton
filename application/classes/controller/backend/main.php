@@ -2,20 +2,18 @@
  
 class Controller_Backend_Main extends Controller_Backend_Backend {
  
-    private $authUser = null;
-    
     public function before() {
         parent::before();
-        $this->auth = Auth::instance();
-        $this->authUser = $this->auth->get_user();
-        if (!$this->authUser || !$this->authUser->logged_in('backend')) {
-            $this->request->redirect(Route::url('backend_user'));
+        if (!$this->authUser || !Auth::instance()->logged_in('backend')) {
+            $this->request->redirect('/backend/user/login');
         }
     }
 
     public function action_index()
     {
-		$this->template->content = 'in backend';
+    }
+    
+    public function action_info() {
     }
  
-} 
+}

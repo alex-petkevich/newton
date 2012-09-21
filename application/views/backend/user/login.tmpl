@@ -4,13 +4,16 @@
     <div id="box">
     <h3>Login</h3>
 
-	<form name="formLogin" method="post" class="form" action="{URL::site('backend/user/login')}">
+	<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/login')}">
 	    <fieldset id="personal">
 	        <legend>INPUT LOGIN INFO</legend>
+	           {if $errors}<div class="error">Incorrect username or password</div>{/if}
 	           <label for="username">username:</label>
 	           <input type="text" name="username" value="" id="username" /> <br />
                <label for="password">password:</label>
                <input type="password" name="password" value="" id="password" /> <br />
+               <label for="remember"> remember me</label> 
+               <input type="checkbox" name="remember" value="1" id="remember" /> 
 	           <div align="center">
                    <input type="Submit" name="subm" value="Login" /> <br />
 	           </div>

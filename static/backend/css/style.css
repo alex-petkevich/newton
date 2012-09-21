@@ -340,7 +340,16 @@ form{
 .form input[type=submit]:hover, .form input[type=button]:hover{
 	background-position:center left;
 }
-
+.w400 {
+    width: 400px;
+}
+.error {
+    color: red;
+    text-align:center; 
+}
+.current-sub {
+    font-weight: bold;
+}
 /*********************
 	Icons
 *********************/
