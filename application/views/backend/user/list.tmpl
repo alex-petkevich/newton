@@ -1,0 +1,42 @@
+{extends file='../backend.tmpl'}
+
+{block name="content"}
+        <div id="box">
+                <h3>Users</h3>
+                {if count($users)}
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th width="40px"><a href="#">ID<img src="{URL::base()}static/backend/img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" /></a></th>
+                                <th><a href="#">Full Name</a></th>
+                                <th><a href="#">Email</a></th>
+                                <th width="70px"><a href="#">Group</a></th>
+                                <th width="50px"><a href="#">ZIP</a></th>
+                                <th width="90px"><a href="#">Registered</a></th>
+                                <th width="60px"><a href="#">Action</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foreach from=$users item=usr}
+                            <tr>
+                                <td class="a-center">{$usr->id}</td>
+                                <td><a href="#"><a href="{URL::base()}backend/user/edit/{$usr->id}">{$usr->username}</a></a></td>
+                                <td>{$usr->email}</td>
+                                <td>General</td>
+                                <td>1000</td>
+                                <td>{$usr->added}</td>
+                                <td class="table-icons"><a href="{URL::base()}backend/user/edit/{$usr->id}"><img
+src="{URL::base()}static/backend/img/icons/page_white_edit.png" title="Edit" width="16" height="16"
+/></a><a href="{URL::base()}backend/user/delete/{$usr->id}"><img
+src="{URL::base()}static/backend/img/icons/page_white_delete.png" title="Delete user" width="16" height="16"
+/></a></td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                    {include file='../paging.tmpl'}
+                {else}
+                    <b>no users has been added</b>
+                {/if}
+        </div>
+{/block}

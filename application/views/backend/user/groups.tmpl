@@ -1,0 +1,36 @@
+{extends file='../backend.tmpl'}
+
+{block name="content"}
+        <div id="box">
+                <h3>Groups</h3>
+                {if count($roles)}
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th width="40px"><a href="#">ID<img src="{URL::base()}static/backend/img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" /></a></th>
+                                <th><a href="#">Name</a></th>
+                                <th><a href="#">Description</a></th>
+                                <th width="60px"><a href="#">Action</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {foreach from=$roles item=role}
+                            <tr>
+                                <td class="a-center">{$role->id}</td>
+                                <td><a href="{URL::base()}backend/user/editrole/{$role->id}">{$role->name}</a></td>
+                                <td>{$role->description}</td>
+                                <td class="table-icons"><a href="{URL::base()}backend/user/editrole/{$role->id}"><img
+src="{URL::base()}static/backend/img/icons/page_white_edit.png" title="Edit" width="16" height="16"
+/></a><a href="{URL::base()}backend/user/deleterole/{$role->id}"><img
+src="{URL::base()}static/backend/img/icons/page_white_delete.png" title="Delete role" width="16" height="16"
+/></a></td>
+                            </tr>
+                            {/foreach}
+                        </tbody>
+                    </table>
+                    {include file='../paging.tmpl'}
+                {else}
+                    <b>no roles has been added</b>
+                {/if}
+        </div>
+{/block}

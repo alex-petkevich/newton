@@ -32,4 +32,14 @@ class Controller_Backend_User extends Controller_Backend_Backend {
         $client->save();        
     }
     
+    public function action_list() {
+        $user = ORM::factory('user');
+        $this->template->users = $user->order_by('id')->find_all();
+    }
+    
+    public function action_groups() {
+        $role = ORM::factory('role');
+        $this->template->roles = $role->order_by('name')->find_all();
+    }
+    
 }
