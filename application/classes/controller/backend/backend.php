@@ -26,8 +26,8 @@ class Controller_Backend_Backend extends Controller_Template {
         {
             $this->template->isClean = TRUE;
         }
-        $this->invokeBuildMenu();
-        
+        $this->buildMenu();
+        $this->buildAssets();
         $this->template->authUser = $this->authUser;
         $this->post = Validation::factory($_POST);
     }    
@@ -47,7 +47,7 @@ class Controller_Backend_Backend extends Controller_Template {
         }
     }
     
-    private function invokeBuildMenu() {
+    private function buildMenu() {
         $Menu = ORM::factory('menu');
         $this->template->MainMenu = $Menu->where('parent_id', '=', '0')->order_by('order_id')->find_all();
         $this->template->MenuItem = ORM::factory('menu')->where('controller', '=', $this->request->controller())->where('action','=',$this->request->action())->find();
@@ -57,5 +57,21 @@ class Controller_Backend_Backend extends Controller_Template {
         $parent_id = $this->template->MenuItem->parent_id ? $this->template->MenuItem->parent_id : $this->template->MenuItem->id;
         $this->template->SubMenu = ORM::factory('menu')->where('parent_id', '=', $parent_id)->order_by('order_id')->find_all();
     }
+    
+    private function buildAssets() {
+        $this->template->styles = array();
+        $this->template->scripts = array();
+        
+        $styles = array(
+            'css/theme.css',
+            'css/style.css',
+        );
+        $scripts = array(
+            'http://code.jquery.com/jquery.min.js',
+        );
+        $this->template->styles = array_merge( $this->template->styles, $styles );
+        $this->template->scripts = array_merge( $this->template->scripts, $scripts );    
+    }
+    
 }
  

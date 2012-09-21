@@ -61,9 +61,10 @@ I18n::lang('en-us');
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
  * saying "Couldn't find constant Kohana::<INVALID_ENV_NAME>"
  */
-if (isset($_SERVER['KOHANA_ENV']))
-{
-	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+if (isset($_SERVER['KOHANA_ENV'])) {
+    Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
+} else {
+    Kohana::$environment = ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? Kohana::DEVELOPMENT : Kohana::PRODUCTION);
 }
 
 /**
@@ -80,7 +81,11 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url' => '', 'index_file' => ''
+	'base_url' => '', 
+	'index_file' => '',
+	'profile' => (Kohana::$environment !== Kohana::PRODUCTION),
+	'caching' => (Kohana::$environment === Kohana::PRODUCTION),
+	'errors' => TRUE
 ));
 
 /**
@@ -108,17 +113,5 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
 
-/**
- * Set the routes. Each route must have a minimum of a name, a URI and a set of
- * defaults for the URI.
- */
- /*
-Route::set('backend_user', 'backend/user/login')
-    ->defaults(array(
-        'directory'  => 'backend',
-        'controller' => 'user',
-        'action'     => 'login',
-    ));
-*/
-
 require_once('route.php');
+
