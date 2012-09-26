@@ -8,12 +8,19 @@ class Controller_Backend_Backend extends Controller_Template {
     public $authUser = FALSE;
     public $errors;
     public $post;
+    public $config;
+
+    protected $allow_free_access = array();
 
     public function before() {
         parent::before();
 
         $this->auth = Auth::instance();
         $this->authUser = $this->auth->get_user();
+
+        if ((!$this->authUser || !Auth::instance()->logged_in('backend')) && !in_array(Request::current()->action(),$this->allow_free_access)) {
+            $this->request->redirect('/backend/user/login');
+        }
         
         try {
             $this->template = View::factory($this->template.'/'.$this->request->controller().'/'.$this->request->action());
@@ -26,6 +33,9 @@ class Controller_Backend_Backend extends Controller_Template {
         {
             $this->template->isClean = TRUE;
         }
+
+        $this->config = Kohana::$config->load('general');
+
         $this->buildMenu();
         $this->buildAssets();
         $this->template->authUser = $this->authUser;
@@ -45,6 +55,7 @@ class Controller_Backend_Backend extends Controller_Template {
         if (!property_exists($this->template,'no_render')) {
             $this->response->body($this->template->render());
         }
+        $this->template->config = $this->config;
     }
     
     private function buildMenu() {
@@ -67,7 +78,9 @@ class Controller_Backend_Backend extends Controller_Template {
             'css/style.css',
         );
         $scripts = array(
-            'http://code.jquery.com/jquery.min.js',
+            'js/lib/jquery.min.js',
+            'js/lib/history.js',
+            'js/backend.js'
         );
         $this->template->styles = array_merge( $this->template->styles, $styles );
         $this->template->scripts = array_merge( $this->template->scripts, $scripts );    

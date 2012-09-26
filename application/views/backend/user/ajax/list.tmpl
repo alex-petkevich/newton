@@ -1,0 +1,36 @@
+{if count($users)}
+    <table width="100%">
+        <thead>
+            <tr>
+                <th width="40px"><a href="{URL::base()}backend/user/list/?order=id" class="orderColumn">ID<img src="{URL::base()}static/backend/img/icons/arrow_down_mini.gif" width="16" height="16" align="absmiddle" /></a></th>
+                <th><a href="{URL::base()}backend/user/list/?order=username" class="orderColumn">Username</a></th>
+                <th><a href="{URL::base()}backend/user/list/?order=email" class="orderColumn">Email</a></th>
+                <th width="70px"><a href="{URL::base()}backend/user/list/?order=group" class="orderColumn">Groups</a></th>
+                <th width="50px"><a href="{URL::base()}backend/user/list/?order=zip" class="orderColumn">ZIP</a></th>
+                <th width="120px"><a href="{URL::base()}backend/user/list/?order=added" class="orderColumn">Registered</a></th>
+                <th width="60px"><a href="javascript:;">Action</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach from=$users item=usr}
+            {assign var=roles value=$usr->roles->find_all()->as_array()}
+            <tr>
+                <td class="a-center">{$usr->id}</td>
+                <td><a href="#"><a href="{URL::base()}backend/user/edit/{$usr->id}">{$usr->username}</a></a></td>
+                <td>{$usr->email}</td>
+                <td>{foreach from=$roles item=role}{$role->name}&nbsp;{/foreach}</td>
+                <td>{$usr->member->zip}</td>
+                <td>{date('Y-m-d H:i:s',$usr->member->added)}</td>
+                <td class="table-icons"><a href="{URL::base()}backend/user/edit/{$usr->id}"><img
+    src="{URL::base()}static/backend/img/icons/page_white_edit.png" title="Edit" width="16" height="16"
+    /></a><a href="{URL::base()}backend/user/delete/{$usr->id}"><img
+    src="{URL::base()}static/backend/img/icons/page_white_delete.png" title="Delete user" width="16" height="16"
+    /></a></td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+    {include file='../paging.tmpl'}
+{else}
+    <b>no users has been added</b>
+{/if}

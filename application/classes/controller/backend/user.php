@@ -2,6 +2,8 @@
  
 class Controller_Backend_User extends Controller_Backend_Backend {
 
+    protected $allow_free_access = array('login','register');
+
     public function action_login() {
         if ($this->authUser)
             $this->request->redirect('/backend/main');
@@ -27,14 +29,13 @@ class Controller_Backend_User extends Controller_Backend_Backend {
         $client->username = "admin";        
         $client->password = "admin";        
         $client->save();
-        $role = ORM::factory('role','1');
-        $client->add('roles',$role);
-        $client->save();        
+        $client->add('roles', ORM::factory('role')->where('name', '=', 'login')->find());
+        $client->add('roles', ORM::factory('role')->where('name', '=', 'backend')->find());
     }
     
     public function action_list() {
         $user = ORM::factory('user');
-        $this->template->users = $user->order_by('id')->find_all();
+        $this->template->users = $user->order_by('username')->find_all();
     }
     
     public function action_groups() {
