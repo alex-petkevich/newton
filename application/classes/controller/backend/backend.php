@@ -21,9 +21,8 @@ class Controller_Backend_Backend extends Controller_Template {
         if ((!$this->authUser || !Auth::instance()->logged_in('backend')) && !in_array(Request::current()->action(),$this->allow_free_access)) {
             $this->request->redirect('/backend/user/login');
         }
-        
         try {
-            $this->template = View::factory($this->template.'/'.$this->request->controller().'/'.$this->request->action());
+            $this->template = View::factory($this->template.'/'.$this->request->controller().'/'.($this->request->is_ajax() ? 'ajax/' : '').$this->request->action());
         }
         catch(Exception $e) {
             $this->template = new stdClass();

@@ -115,3 +115,5 @@ require_once('route.php');
  */
 Kohana::$config->attach(new Config_File);
 Kohana::$config->attach(new Config_Database(array('instance' => Kohana_Database::instance(),'table'=>'config')), false);
+
+register_shutdown_function(array('I18n', 'write'));

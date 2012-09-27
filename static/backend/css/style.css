@@ -350,6 +350,22 @@ form{
 .current-sub {
     font-weight: bold;
 }
+.spinner {
+    background-image: url('/static/spin.gif');
+    height: 16px;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+}
+.sort {
+    background-image: url('/static/backend/img/icons/arrow_down_mini.gif');
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: right;
+    padding-right: 15px;
+}
+.sort_up {
+    background-image: url('/static/backend/img/icons/arrow_up_mini.png');
+}
 /*********************
 	Icons
 *********************/

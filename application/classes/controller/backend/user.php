@@ -34,8 +34,22 @@ class Controller_Backend_User extends Controller_Backend_Backend {
     }
     
     public function action_list() {
-        $user = ORM::factory('user');
-        $this->template->users = $user->order_by('username')->find_all();
+        $order = 'id';
+        switch ($this->request->query('order')) {
+            case "id":
+                $order = "id";
+            break;
+            case "username":
+                $order = "username";
+            break;
+            case "email":
+                $order = "email";
+            break;
+        }
+        $dir = ($this->request->query('desc') ? "desc" : "asc");
+        $user = ORM::factory('user');        
+        $this->template->users = $user->order_by($order,$dir)->find_all();
+        $this->template->sort = array('order'=>$order,'dir'=>$dir);
     }
     
     public function action_groups() {
