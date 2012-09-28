@@ -10,7 +10,14 @@ class Controller_Backend_User extends Controller_Backend_Backend {
         if (isset($_POST) && Valid::not_empty($_POST)) {
             $remember = isset($_POST['remember']) && $_POST['remember'];
             if (Auth::instance()->login($_POST['username'], $_POST['password'], $remember)) {
-                $this->request->redirect('/backend/main');
+                if (Session::instance()->get('REDIRECT_URL'))
+                {
+                    $url = Session::instance()->get('REDIRECT_URL');
+                    Session::instance()->delete('REDIRECT_URL');
+                    $this->request->redirect($url);
+                }
+                else
+                    $this->request->redirect('/backend/main');
             }
             else  {
                 $this->errors['login'] = 1;

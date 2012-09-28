@@ -17,8 +17,8 @@ class Controller_Backend_Backend extends Controller_Template {
 
         $this->auth = Auth::instance();
         $this->authUser = $this->auth->get_user();
-
         if ((!$this->authUser || !Auth::instance()->logged_in('backend')) && !in_array(Request::current()->action(),$this->allow_free_access)) {
+            Session::instance()->set('REDIRECT_URL', URL::site($this->request->uri(),TRUE));
             $this->request->redirect('/backend/user/login');
         }
         try {
