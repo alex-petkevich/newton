@@ -60,8 +60,26 @@ class Controller_Backend_User extends Controller_Backend_Backend {
     }
     
     public function action_groups() {
+        $order = 'id';
+        switch ($this->request->query('order')) {
+            case "id":
+                $order = "id";
+            break;
+            case "name":
+                $order = "name";
+            break;
+            case "description":
+                $order = "description";
+            break;
+        }
+        $dir = ($this->request->query('desc') ? "desc" : "asc");
         $role = ORM::factory('role');
-        $this->template->roles = $role->order_by('name')->find_all();
+        $this->template->roles = $role->order_by($order,$dir)->find_all();
+        $this->template->sort = array('order'=>$order,'dir'=>$dir);
+    }
+    
+    public function action_addgroup() {
+        
     }
     
 }

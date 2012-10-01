@@ -69,20 +69,16 @@ class Controller_Backend_Backend extends Controller_Template {
     }
     
     private function buildAssets() {
-        $this->template->styles = array();
-        $this->template->scripts = array();
-        
-        $styles = array(
-            'css/theme.css',
-            'css/style.css',
-        );
-        $scripts = array(
-            'js/lib/jquery.min.js',
-            'js/lib/history.js',
-            'js/backend.js'
-        );
-        $this->template->styles = array_merge( $this->template->styles, $styles );
-        $this->template->scripts = array_merge( $this->template->scripts, $scripts );    
+        $this->template->assets = Assets::factory('main')
+            ->css('backend/theme.css')
+            ->css('backend/style.css')
+            ->css('backend/ie-sucks.css', array('condition' => 'IE'))
+            
+            ->js("lib/jquery.min.js")
+            ->js("lib/history.js")
+            ->js("backend.js", array('PROCESSOR' =>"jsmin"))
+
+            ->js_block("window.asset_merger = true;");
     }
     
 }

@@ -3,16 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Users - Admin Template</title>
-{foreach from=$styles item=file}
-<link rel="stylesheet" type="text/css" href="{URL::base()}static/backend/{$file}" />
-{/foreach}
-{foreach from=$scripts item=file}
-<script src="{URL::base()}static/{$file}" type="text/javascript" charset="utf-8"></script>
-{/foreach}
-
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="{URL::base()}static/backend/css/ie-sucks.css" />
-<![endif]-->
+{$assets}
 </head>
 
 <body>

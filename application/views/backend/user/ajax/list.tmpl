@@ -5,9 +5,9 @@
                 <th width="40px"><a href="{URL::base()}backend/user/list/?order=id{if $sort.dir != 'desc'}&desc=1{/if}" class="orderColumn{if $sort.order == 'id'} sort{if $sort.dir == 'desc'} sort_up{/if}{/if}">{__('ID')}</a></th>
                 <th><a href="{URL::base()}backend/user/list/?order=username{if $sort.dir != 'desc'}&desc=1{/if}" class="orderColumn{if $sort.order == 'username'} sort{if $sort.dir == 'desc'} sort_up{/if}{/if}">{__('Username')}</a></th>
                 <th><a href="{URL::base()}backend/user/list/?order=email{if $sort.dir != 'desc'}&desc=1{/if}" class="orderColumn{if $sort.order == 'email'} sort{if $sort.dir == 'desc'} sort_up{/if}{/if}">{__('Email')}</a></th>
-                <th width="70px"><a href="javascript:;" class="orderColumn">{__('Groups')}</a></th>
-                <th width="50px"><a href="javascript:;" class="orderColumn">{__('ZIP')}</a></th>
-                <th width="120px"><a href="{URL::base()}backend/user/list/?order=added" class="orderColumn">{__('Registered')}</a></th>
+                <th width="70px"><a href="javascript:;">{__('Groups')}</a></th>
+                <th width="50px"><a href="javascript:;">{__('ZIP')}</a></th>
+                <th width="120px"><a href="{URL::base()}backend/user/list/?order=added">{__('Registered')}</a></th>
                 <th width="60px"><a href="javascript:;">{__('Action')}</a></th>
             </tr>
         </thead>
@@ -22,9 +22,9 @@
                 <td>{$usr->member->zip}</td>
                 <td>{date('Y-m-d H:i:s',$usr->member->added)}</td>
                 <td class="table-icons"><a href="{URL::base()}backend/user/edit/{$usr->id}"><img
-    src="{URL::base()}static/backend/img/icons/page_white_edit.png" title="{__('Edit')}" width="16" height="16"
+    src="{URL::base()}static/img/backend/icons/page_white_edit.png" title="{__('Edit')}" width="16" height="16"
     /></a><a href="{URL::base()}backend/user/delete/{$usr->id}"><img
-    src="{URL::base()}static/backend/img/icons/page_white_delete.png" title="{__('Delete user')}" width="16" height="16"
+    src="{URL::base()}static/img/backend/icons/page_white_delete.png" title="{__('Delete user')}" width="16" height="16"
     /></a></td>
             </tr>
             {/foreach}

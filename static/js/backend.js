@@ -1,6 +1,7 @@
 $(function() {
 	// bind tables ordering
 	bindAutoReload();
+	bindCancelButtons();
 });
 
 
@@ -27,6 +28,16 @@ function bindAutoReload() {
 				bindAutoReload();
 			}
 		});
+		return false;
+	});
+}
+
+function bindCancelButtons() {
+	$('input.cancel_btn').on('click',function(evt){
+		var url = $(evt.target).attr('rel');
+		if (url.length>0) {
+			window.location=url;
+		}
 		return false;
 	});
 }

@@ -2,21 +2,22 @@
 
 {block name='content'}
     <div id="box">
-    <h3>Login</h3>
+    <h3>{__('Login')}</h3>
 
 	<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/login')}">
 	    <fieldset id="personal">
-	        <legend>INPUT LOGIN INFO</legend>
+	        <legend>{__('INPUT LOGIN INFO')}</legend>
 	           {if $errors}<div class="error">{Kohana::message('backend', 'incorrect_login')}</div>{/if}
-	           <label for="username">username:</label>
+	           <label for="username">{__('username')}:</label>
 	           <input type="text" name="username" value="" id="username" /> <br />
-               <label for="password">password:</label>
+               <label for="password">{__('password')}:</label>
                <input type="password" name="password" value="" id="password" /> <br />
-               <label for="remember"> remember me</label> 
+               <label for="remember"> {__('remember me')}</label> 
                <input type="checkbox" name="remember" value="1" id="remember" /> 
 	           <div align="center">
-                   <input type="Submit" name="subm" value="Login" /> <br />
+                   <input type="Submit" name="subm" value="{__('Login')}" /> <br />
 	           </div>
+         </fieldset>
 	</form>
 	
 	</div>

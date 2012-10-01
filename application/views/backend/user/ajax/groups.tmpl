@@ -1,0 +1,29 @@
+{if count($roles)}
+    <table width="100%">
+        <thead>
+            <tr>
+                <th width="40px"><a href="{URL::base()}backend/user/groups/?order=id{if $sort.dir != 'desc'}&desc=1{/if}" class="orderColumn{if $sort.order == 'id'} sort{if $sort.dir == 'desc'} sort_up{/if}{/if}">{__('ID')}</a></th>
+                <th><a href="{URL::base()}backend/user/groups/?order=name{if $sort.dir != 'desc'}&desc=1{/if}" class="orderColumn{if $sort.order == 'name'} sort{if $sort.dir == 'desc'} sort_up{/if}{/if}">{__('Name')}</a></th>
+                <th><a href="{URL::base()}backend/user/groups/?order=description{if $sort.dir != 'desc'}&desc=1{/if}" class="orderColumn{if $sort.order == 'description'} sort{if $sort.dir == 'desc'} sort_up{/if}{/if}">{__('Description')}</a></th>
+                <th width="60px"><a href="#">{__('Action')}</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach from=$roles item=role}
+            <tr>
+                <td class="a-center">{$role->id}</td>
+                <td><a href="{URL::base()}backend/user/editrole/{$role->id}">{$role->name}</a></td>
+                <td>{$role->description}</td>
+                <td class="table-icons"><a href="{URL::base()}backend/user/editrole/{$role->id}"><img
+src="{URL::base()}static/img/backend/icons/page_white_edit.png" title="Edit')}" width="16" height="16"
+/></a><a href="{URL::base()}backend/user/deleterole/{$role->id}"><img
+src="{URL::base()}static/img/backend/icons/page_white_delete.png" title="{__('Delete role')}" width="16" height="16"
+/></a></td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+    {include file='../../paging.tmpl'}
+{else}
+    <b>{__('no roles has been added')}</b>
+{/if}

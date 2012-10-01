@@ -104,7 +104,12 @@ Kohana::modules(array(
 	 'image'      => MODPATH.'image',      // Image manipulation
 	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	 'smarty'     => MODPATH.'smarty',        
-	// 'unittest'   => MODPATH.'unittest',   // Unit testing
+     'assets'     => MODPATH.'assets',        
+     'storage'    => MODPATH.'storage',   
+     'developerbar'    => MODPATH.'developerbar',   // Developer Bar
+     'email'    => MODPATH.'email',   
+     'paginate'    => MODPATH.'paginate',   
+     	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
 
