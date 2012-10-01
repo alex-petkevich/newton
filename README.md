@@ -1,5 +1,5 @@
-# Kohana PHP Framework, version 3.2 (development)
+# PROWEB 3.0 CMS based on Kohana 3.2
 
-This is the current development version of [Kohana](http://kohanaframework.org/).
+This is the current development version of [Proweb CMS](http://mrdoggy.info/).
 
-For the most current release, see the 3.1/master branch.
+For the more information pease contact the lead developer [Alex Petkevich](mailto:alex@mrdoggy.info)
