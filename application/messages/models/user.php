@@ -9,7 +9,7 @@ return array(
     'list.group'                => 'Group',
     'list.zip'                  => 'ZIP',
     'list.registered'           => 'Registered',
-    'Action'                    => 'Action+',
+    'Action'                    => 'Action',
     'list.delete_user'          => 'Delete user',
     'list.edit'                 => 'Edit',
 );

@@ -79,7 +79,13 @@ class Controller_Backend_User extends Controller_Backend_Backend {
     }
     
     public function action_addgroup() {
-        
+        $Menu = ORM::factory('menu');
+        $rolesMenu = ORM::factory('roles_menu');
+        $uMenu = $Menu->order_by('order_id')->find_all()->as_array();
+        $selectedItems = $rolesMenu->find_all();
+        foreach($uMenu as $k=>$v) {
+            
+        }
     }
     
 }
