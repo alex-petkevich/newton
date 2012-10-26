@@ -366,6 +366,9 @@ form{
 .sort_up {
     background-image: url('/static/img/backend/icons/arrow_up_mini.png');
 }
+.form-shift {
+    margin-left:50px;
+}
 /*********************
 	Icons
 *********************/

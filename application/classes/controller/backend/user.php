@@ -80,12 +80,27 @@ class Controller_Backend_User extends Controller_Backend_Backend {
     
     public function action_addgroup() {
         $Menu = ORM::factory('menu');
-        $rolesMenu = ORM::factory('roles_menu');
         $uMenu = $Menu->order_by('order_id')->find_all()->as_array();
-        $selectedItems = $rolesMenu->find_all();
-        foreach($uMenu as $k=>$v) {
-            
+        $Role = ORM::factory('role');
+        if ( !empty($_POST)) {
+            $Role->values($_POST);
+            try{
+                if ($Role->check()) {
+                    $Role->save();
+                }
+                else {
+                    $this->errors = $Role->validate()->errors();
+                }
+            }
+            catch(ORM_Validation_Exception $ex) {
+                Debug::vars($ex);
+            }
         }
+        /*Debug::vars($user->roles()->as_array());
+        foreach($uMenu as $k=>$v) {
+
+        }*/
+        $this->template->uMenu = $uMenu;
     }
     
 }

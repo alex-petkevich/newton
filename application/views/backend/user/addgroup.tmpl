@@ -1,22 +1,41 @@
 {extends file='../backend.tmpl'}
 
 {block name='content'}
-    <div id="box">
+<div id="box">
     <h3>{__('Add group')}</h3>
 
     <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/addgroup')}">
         <fieldset id="personal">
-               {if $errors}<div class="error">{Kohana::message('backend', 'incorrect_login')}</div>{/if}
-               <label for="name">Name:</label>
-               <input type="text" name="name" value="" id="name" /> <br />
-               <label for="description">Description:</label>
-               <input type="text" name="description" value="" id="description" /> <br />
-               <div align="center">
-                   <input type="Button" name="" value="Cancel" class="cancel_btn" rel="{URL::site('backend/user/groups')}" /> 
-                   <input type="Submit" name="subm" value="Save" /> <br />
-               </div>
-         </fieldset>
+            {if $errors}
+            <div class="error">
+                {Kohana::message('backend', 'incorrect_login')}
+            </div>
+            {/if} <label for="name">Name:</label>
+            <input type="text" name="name" value="" id="name" />
+            <br />
+            <label for="description">Description:</label>
+            <input type="text" name="description" value="" id="description" />
+            <br />
+            <div class="form-shift">
+                {foreach from=$uMenu item=Mn}
+                    {if $Mn->parent_id == 0}
+                        {$Mn->title}
+                        <br />
+                        {foreach from=$uMenu item=Mn2}
+                            {if $Mn->id == $Mn2->parent_id}
+                                <input type="checkbox" name="menu[]" value="{$Mn2->id}" />{$Mn2->title}<br />
+                            {/if}
+                        {/foreach}
+                    {/if}
+                {/foreach}
+            </div>
+            <div align="center">
+                <input type="Button" name="" value="Cancel" class="cancel_btn" rel="{URL::site('backend/user/groups')}" />
+                <input type="Submit" name="subm" value="Save" />
+                <br />
+            </div>
+        </fieldset>
     </form>
-    
-    </div>
+
+</div>
 {/block}
