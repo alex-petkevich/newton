@@ -93,7 +93,7 @@ class Controller_Backend_User extends Controller_Backend_Backend {
                 }
             }
             catch(ORM_Validation_Exception $ex) {
-                Debug::vars($ex);
+                $this->errors = $ex->errors();
             }
         }
         /*Debug::vars($user->roles()->as_array());
