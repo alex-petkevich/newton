@@ -6,15 +6,13 @@
 
     <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/addgroup')}">
         <fieldset id="personal">
-            {if $errors}
-            <div class="error">
-                {Kohana::message('backend', 'incorrect_login')}
-            </div>
-            {/if} <label for="name">Name:</label>
-            <input type="text" name="name" value="" id="name" />
+           {if isset($errors['name'])}<div class="error">{$errors['name']}</div>{/if}
+           <label for="name">Name:</label>
+            <input type="text" name="name" value="{$Role->name}" id="name" />
             <br />
-            <label for="description">Description:</label>
-            <input type="text" name="description" value="" id="description" />
+           {if isset($errors['description'])}<div class="error">{$errors['description']}</div>{/if}
+           <label for="description">Description:</label>
+            <input type="text" name="description" value="{$Role->description}" id="description" />
             <br />
             <div class="form-shift">
                 {foreach from=$uMenu item=Mn}
@@ -23,7 +21,7 @@
                         <br />
                         {foreach from=$uMenu item=Mn2}
                             {if $Mn->id == $Mn2->parent_id}
-                                <input type="checkbox" name="menu[]" value="{$Mn2->id}" />{$Mn2->title}<br />
+                                <input type="checkbox" name="menu[]" value="{$Mn2->id}" id="role_{$Mn2->id}" />&nbsp;&nbsp;<label for="role_{$Mn2->id}">{$Mn2->title}</label><br />
                             {/if}
                         {/foreach}
                     {/if}

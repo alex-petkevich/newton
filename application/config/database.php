@@ -18,10 +18,10 @@ return array
 			 *
 			 * Ports and sockets may be appended to the hostname.
 			 */
-			'hostname'   => 'localhost',
-			'database'   => 'newton',
-			'username'   => 'mysql',
-			'password'   => 'mysql',
+			'hostname'   => 'openserver',
+			'database'   => 'koh',
+			'username'   => 'root',
+			'password'   => '',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
@@ -40,9 +40,9 @@ return array
 			 * string   password    database password
 			 * boolean  persistent  use persistent connections?
 			 */
-			'dsn'        => 'mysql:host=localhost;dbname=kohana',
+			'dsn'        => 'mysql:host=localhost;dbname=koh',
 			'username'   => 'root',
-			'password'   => 'r00tdb',
+			'password'   => '',
 			'persistent' => FALSE,
 		),
 		/**

@@ -87,19 +87,21 @@ class Controller_Backend_User extends Controller_Backend_Backend {
             try{
                 if ($Role->check()) {
                     $Role->save();
+                    $this->request->redirect('user/groups');
                 }
                 else {
                     $this->errors = $Role->validate()->errors();
                 }
             }
             catch(ORM_Validation_Exception $ex) {
-                $this->errors = $ex->errors();
+                $this->errors = $ex->errors('');
             }
         }
         /*Debug::vars($user->roles()->as_array());
         foreach($uMenu as $k=>$v) {
 
         }*/
+       $this->template->Role = $Role; 
         $this->template->uMenu = $uMenu;
     }
     
