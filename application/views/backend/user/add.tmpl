@@ -1,0 +1,34 @@
+{extends file='../backend.tmpl'}
+
+{block name='content'}
+<div id="box">
+    <h3>{__('Add user')}</h3>
+
+    <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/add')}">
+        <fieldset id="personal">
+           {if isset($errors['username'])}<div class="error">{$errors['username']}</div>{/if}
+           <label for="username">{__('Username')}:</label>
+            <input type="text" name="username" value="{$User->username}" id="username" />
+            <br />
+           {if isset($errors['email'])}<div class="error">{$errors['email']}</div>{/if}
+           <label for="email">{__('Email')}:</label>
+            <input type="text" name="email" value="{$User->email}" id="email" />
+            <br />
+           {if isset($errors['password'])}<div class="error">{$errors['password']}</div>{/if}
+           <label for="password">{__('Password')}:</label>
+            <input type="text" name="password" value="" id="password" />
+            <br />
+           <label for="password_confirm">{__('Confirm password')}:</label>
+            <input type="text" name="password_confirm" value="" id="password_confirm" />
+            <br />
+           
+            <div align="center">
+                <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
+                <input type="Submit" name="subm" value="{__('Save')}" />
+                <br />
+            </div>
+        </fieldset>
+    </form>
+
+</div>
+{/block}

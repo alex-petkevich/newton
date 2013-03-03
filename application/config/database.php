@@ -18,7 +18,7 @@ return array
 			 *
 			 * Ports and sockets may be appended to the hostname.
 			 */
-			'hostname'   => 'openserver',
+			'hostname'   => 'localhost',
 			'database'   => 'koh',
 			'username'   => 'root',
 			'password'   => '',

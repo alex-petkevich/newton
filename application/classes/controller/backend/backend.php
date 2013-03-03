@@ -51,6 +51,9 @@ class Controller_Backend_Backend extends Controller_Template {
             // Append errors
             $this->template->errors = $this->errors;
         }
+        if ($this->request->param('ok')) {
+           $this->template->ok = $this->request->param('ok');
+        }
         if (!property_exists($this->template,'no_render')) {
             $this->response->body($this->template->render());
         }

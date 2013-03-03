@@ -1,3 +1,4 @@
+{if isset($ok)}<div class="ok">{__('Operation completed successfully')}</div>{/if}
 {if count($roles)}
     <table width="100%">
         <thead>
@@ -12,11 +13,11 @@
             {foreach from=$roles item=role}
             <tr>
                 <td class="a-center">{$role->id}</td>
-                <td><a href="{URL::base()}backend/user/editrole/{$role->id}">{$role->name}</a></td>
+                <td><a href="{URL::base()}backend/user/editgroup/{$role->id}">{$role->name}</a></td>
                 <td>{$role->description}</td>
-                <td class="table-icons"><a href="{URL::base()}backend/user/editrole/{$role->id}"><img
+                <td class="table-icons"><a href="{URL::base()}backend/user/editgroup/{$role->id}"><img
 src="{URL::base()}static/img/backend/icons/page_white_edit.png" title="Edit')}" width="16" height="16"
-/></a><a href="{URL::base()}backend/user/deleterole/{$role->id}"><img
+/></a><a href="{URL::base()}backend/user/deletegroup/{$role->id}"><img
 src="{URL::base()}static/img/backend/icons/page_white_delete.png" title="{__('Delete role')}" width="16" height="16"
 /></a></td>
             </tr>

@@ -347,6 +347,10 @@ form{
     color: red;
     text-align:center; 
 }
+.ok {
+    color: green;
+    text-align:center;
+}
 .current-sub {
     font-weight: bold;
 }

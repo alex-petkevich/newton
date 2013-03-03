@@ -18,6 +18,10 @@ class Model_Auth_User extends ORM {
 		'user_tokens' => array('model' => 'user_token'),
 		'roles'       => array('model' => 'role', 'through' => 'roles_users'),
 	);
+    
+    protected $_has_one = array(
+         'members' => array('model' => 'members','foreign_key'=>'user_id')
+    );
 
 	/**
 	 * Rules for the user model. Because the password is _always_ a hash

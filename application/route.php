@@ -1,5 +1,5 @@
 <?
-Route::set('backend', 'backend(/<controller>(/<action>(/<id>)))')
+Route::set('backend', 'backend(/<controller>(/<action>(/<id>(/<ok>))))')
     ->defaults(array(
         'directory'  => 'backend',
     ));

@@ -2,9 +2,9 @@
 
 {block name='content'}
 <div id="box">
-    <h3>{__('Add group')}</h3>
+    <h3>{__('Edit group')}</h3>
 
-    <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/addgroup')}">
+    <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/editgroup')}/{$Role->id}">
         <fieldset id="personal">
            {if isset($errors['name'])}<div class="error">{$errors['name']}</div>{/if}
            <label for="name">{__('Name')}:</label>
