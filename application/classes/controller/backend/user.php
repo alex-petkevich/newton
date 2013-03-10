@@ -86,6 +86,27 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $this->template->User = $User;
     }
 
+    public function action_edit()
+    {
+        $User = new Model_User($this->request->param('id'));
+        if (!empty($_POST)) {
+            $User->values($_POST);
+            try {
+                if ($User->check()) {
+                    $User->save();
+                    $this->request->redirect('backend/user/list/0/ok');
+                }
+                else {
+                    $this->errors = $User->validate()->errors();
+                }
+            }
+            catch (ORM_Validation_Exception $ex) {
+                $this->errors = $ex->errors('');
+            }
+        }
+
+        $this->template->User = $User;
+    }
 
     public function action_groups()
    {

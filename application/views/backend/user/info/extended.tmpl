@@ -1,0 +1,29 @@
+<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/add')}">
+    <fieldset id="personal">
+        <legend>{__('Member info')}</legend>
+        {if isset($errors['firstname'])}<div class="error">{$errors['firstname']}</div>{/if}
+        <label for="firstname">{__('First name')}:</label>
+        <input type="text" name="firstname" value="{$User->member->firstname}" id="firstname" />
+        <br />
+        {if isset($errors['lastname'])}<div class="error">{$errors['lastname']}</div>{/if}
+        <label for="lastname">{__('Last name')}:</label>
+        <input type="text" name="lastname" value="{$User->member->lastname}" id="lastname" />
+        <br />
+        {if isset($errors['gender'])}<div class="error">{$errors['gender']}</div>{/if}
+        <label for="gender">{__('Gender')}:</label>
+        <input type="radio" name="gender" value="1" {if $User->member->gender == '1'} checked="checked" {/if}id="gender1" />
+        Male
+        <input type="radio" name="gender" value="0" {if $User->member->gender == '0'} checked="checked" {/if}id="gender2" />
+        Female
+        <br />
+        <label for="added">{__('Date added')}:</label>
+        <input type="text" name="added" value="{$User->member->added}" id="added" disabled="disabled" />
+        <br />
+
+        <div align="center">
+            <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
+            <input type="Submit" name="subm" value="{__('Save')}" />
+            <br />
+        </div>
+    </fieldset>
+</form>

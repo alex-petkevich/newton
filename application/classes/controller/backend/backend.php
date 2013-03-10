@@ -76,8 +76,10 @@ class Controller_Backend_Backend extends Controller_Template {
             ->css('backend/theme.css')
             ->css('backend/style.css')
             ->css('backend/ie-sucks.css', array('condition' => 'IE'))
+            ->css('backend/jquery-ui.css')
             
-            ->js("lib/jquery.min.js")
+            ->js("lib/jquery.js")
+            ->js("lib/jquery-ui.js")
             ->js("lib/history.js")
             ->js("backend.js", array('PROCESSOR' =>"jsmin"))
 
