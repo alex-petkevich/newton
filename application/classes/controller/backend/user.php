@@ -68,10 +68,15 @@ class Controller_Backend_User extends Controller_Backend_Backend
     {
         $User = new Model_User($this->request->param('id'));
         if (!empty($_POST)) {
-            $User->values($_POST);
-            try {
+              $User->values($_POST);
+              try {
                 if ($User->check()) {
-                    $User->save();
+                    $User->create_user($_POST, array(
+                        'username',
+                        'password',
+                        'email',
+                    ));
+
                     $this->request->redirect('backend/user/list/0/ok');
                 }
                 else {
@@ -93,7 +98,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
             $User->values($_POST);
             try {
                 if ($User->check()) {
-                    $User->save();
+                    $User->update_user($_POST);
                     $this->request->redirect('backend/user/list/0/ok');
                 }
                 else {
