@@ -3,10 +3,26 @@
 {block name='content'}
 <div id="box">
     <h3>{__('Edit user')}</h3>
-
+    <div id="tabs">
+        <ul>
+            <li><a href="#tabs-1">{__('General info')}</a></li>
+            <li><a href="#tabs-2">{__('Groups')}</a></li>
+            <li><a href="#tabs-3">{__('Extended info')}</a></li>
+        </ul>
+    <div id="tabs-1">
     {include file="./info/general.tmpl"}
+    </div>
+    <div id="tabs-2">
     {include file="./info/groups.tmpl"}
+    </div>
+    <div id="tabs-3">
     {include file="./info/extended.tmpl"}
-
+    </div>
 </div>
+
+    <script type="text/javascript">
+        $(function() {
+            $( "#tabs" ).tabs();
+        });
+    </script>
 {/block}

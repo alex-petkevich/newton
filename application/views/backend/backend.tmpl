@@ -27,7 +27,7 @@
             <div id="panel">
                 <ul>
                   {foreach from=$SubMenu item=Mn}
-                    <li><a href="{URL::base()}backend/{$Mn->controller}/{$Mn->action}{if $Mn->params}?{$Mn->params}{/if}"{if $Mn->id == $MenuItem->id} class="current-sub"{/if}>{$Mn->title}</a></li>
+                    <li><a href="{URL::base()}backend/{$Mn->controller}/{$Mn->action}{if $Mn->params}?{$Mn->params}{/if}"{if $Mn->id == $MenuItem->id && $MenuItem->order_id >= 0} class="current-sub"{/if}>{$Mn->title}</a></li>
                   {/foreach}
                 </ul>
             </div>

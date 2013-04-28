@@ -1,0 +1,13 @@
+<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}">
+
+    {foreach from=$Groups item=Grp}
+        <input type="checkbox" name="group[]" value="{$Grp->id}" id="group_{$Grp->id}" />&nbsp;{$Grp->name}<br />
+    {/foreach}
+    
+    <br />
+    <div align="center">
+        <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
+        <input type="Submit" name="subm" value="{__('Save')}" />
+        <br />
+    </div>
+</form>

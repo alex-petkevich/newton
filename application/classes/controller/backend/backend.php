@@ -64,11 +64,15 @@ class Controller_Backend_Backend extends Controller_Template {
         $Menu = ORM::factory('menu');
         $this->template->MainMenu = $Menu->where('parent_id', '=', '0')->order_by('order_id')->find_all();
         $this->template->MenuItem = ORM::factory('menu')->where('controller', '=', $this->request->controller())->where('action','=',$this->request->action())->find();
-         if (!$this->template->MenuItem) {
-            $this->template->MenuItem = $this->template->MainMenu[0];
-        } 
+        if (!$this->template->MenuItem->id) {
+            $this->template->MenuItem = ORM::factory('menu')->where('controller', '=', $this->request->controller())->where('parent_id','!=','0')->find();
+            if (!$this->template->MenuItem->id)
+                $this->template->MenuItem = $this->template->MainMenu[0];
+            $this->template->MenuItem->order_id = -1;
+        }
         $parent_id = $this->template->MenuItem->parent_id ? $this->template->MenuItem->parent_id : $this->template->MenuItem->id;
         $this->template->SubMenu = ORM::factory('menu')->where('parent_id', '=', $parent_id)->order_by('order_id')->find_all();
+        
     }
     
     private function buildAssets() {

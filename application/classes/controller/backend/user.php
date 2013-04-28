@@ -93,6 +93,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
 
     public function action_edit()
     {
+        $role = ORM::factory('role');
         $User = new Model_User($this->request->param('id'));
         if (!empty($_POST)) {
             $User->values($_POST);
@@ -109,7 +110,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
                 $this->errors = $ex->errors('');
             }
         }
-
+        $this->template->Groups = $role->find_all();
         $this->template->User = $User;
     }
 
