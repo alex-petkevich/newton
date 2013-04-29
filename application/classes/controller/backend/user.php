@@ -95,20 +95,19 @@ class Controller_Backend_User extends Controller_Backend_Backend
     {
         $role = ORM::factory('role');
         $User = new Model_User($this->request->param('id'));
-        if (!empty($_POST)) {
-            $User->values($_POST);
-            try {
-                if ($User->check()) {
-                    $User->update_user($_POST);
-                    $this->request->redirect('backend/user/list/0/ok');
-                }
-                else {
-                    $this->errors = $User->validate()->errors();
-                }
-            }
-            catch (ORM_Validation_Exception $ex) {
-                $this->errors = $ex->errors('');
-            }
+        $type = (isset($_POST['type']) ? $_POST['type'] : 'general');
+        switch($type) {
+            case "extended" :
+                $this->edit_extended($User);
+                $this->template->type = 2;
+            break;
+            case "groups" :
+                $this->edit_groups($User);
+                $this->template->type = 1;
+            break;
+            default:
+                $this->edit_general($User);
+                $this->template->type = 0;
         }
         $this->template->Groups = $role->find_all();
         $this->template->User = $User;
@@ -181,4 +180,36 @@ class Controller_Backend_User extends Controller_Backend_Backend
       $this->request->redirect('backend/user/groups/0/ok');
    }
 
+
+    private function edit_groups($User) {
+        if (!empty($_POST)) {
+            $this->template->ok = true;
+        }
+    }
+
+    private function edit_extended($User) {
+        if (!empty($_POST)) {
+            $this->template->ok = true;
+
+        }
+    }
+
+    private function edit_general($User) {
+        if (!empty($_POST)) {
+            $User->values($_POST);
+            try {
+                if ($User->check()) {
+                    $User->update_user($_POST);
+                    //$this->request->redirect('backend/user/list/0/ok');
+                    $this->template->ok = true;
+                }
+                else {
+                    $this->errors = $User->validate()->errors();
+                }
+            }
+            catch (ORM_Validation_Exception $ex) {
+                $this->errors = $ex->errors('');
+            }
+        }
+    }
 }

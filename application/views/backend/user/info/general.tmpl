@@ -1,4 +1,4 @@
-<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}">
+<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
     {if isset($errors['username'])}<div class="error">{$errors['username']}</div>{/if}
         <label for="username">{__('Username')}:</label>
         <input type="text" name="username" value="{$User->username}" id="username" />
@@ -20,4 +20,5 @@
             <input type="Submit" name="subm" value="{__('Save')}" />
             <br />
         </div>
+    <input type="hidden" name="type" value="general"/>
 </form>

@@ -1,4 +1,4 @@
-<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}">
+<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
 
     {foreach from=$Groups item=Grp}
         <input type="checkbox" name="group[]" value="{$Grp->id}" id="group_{$Grp->id}" />&nbsp;{$Grp->name}<br />
@@ -10,4 +10,5 @@
         <input type="Submit" name="subm" value="{__('Save')}" />
         <br />
     </div>
+    <input type="hidden" name="type" value="groups"/>
 </form>
