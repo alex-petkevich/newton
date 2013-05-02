@@ -111,6 +111,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
         }
         $this->template->Groups = $role->find_all();
         $this->template->User = $User;
+        $this->template->Roles = $User->roles->find_all()->as_array();
     }
 
     public function action_groups()
@@ -183,15 +184,16 @@ class Controller_Backend_User extends Controller_Backend_Backend
 
     private function edit_groups($User) {
         if (!empty($_POST)) {
-            $this->template->ok = true;
+            $this->template->ok = true;            
+            $User->remove('roles',null);
+            foreach($_POST['group'] as $k=>$v) {
+                $User->add('roles', ORM::factory('role', $v));
+            }
         }
     }
 
     private function edit_extended($User) {
-        if (!empty($_POST)) {
-            $this->template->ok = true;
-
-        }
+        $this->edit_general($User);
     }
 
     private function edit_general($User) {

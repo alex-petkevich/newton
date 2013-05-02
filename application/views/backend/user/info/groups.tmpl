@@ -1,7 +1,7 @@
 <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
 
     {foreach from=$Groups item=Grp}
-        <input type="checkbox" name="group[]" value="{$Grp->id}" id="group_{$Grp->id}" />&nbsp;{$Grp->name}<br />
+        <input type="checkbox" name="group[]" value="{$Grp->id}" id="group_{$Grp->id}"{foreach from=$Roles item=role}{if $role->id == $Grp->id} checked="checked"{/if}{/foreach} />&nbsp;{$Grp->name}<br />
     {/foreach}
     
     <br />

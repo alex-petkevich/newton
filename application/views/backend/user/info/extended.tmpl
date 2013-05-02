@@ -1,4 +1,4 @@
-<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/add')}/{$User->id}">
+<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
         {if isset($errors['firstname'])}<div class="error">{$errors['firstname']}</div>{/if}
         <label for="firstname">{__('First name')}:</label>
         <input type="text" name="firstname" value="{$User->member->firstname}" id="firstname" />
@@ -15,7 +15,7 @@
         Female
         <br />
         <label for="added">{__('Date added')}:</label>
-        <input type="text" name="added" value="{$User->member->added}" id="added" disabled="disabled" />
+        <input type="text" name="added" value="{$User->member->added}" id="added" />
         <br />
 
         <div align="center">
