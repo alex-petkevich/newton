@@ -193,7 +193,21 @@ class Controller_Backend_User extends Controller_Backend_Backend
     }
 
     private function edit_extended($User) {
-        $this->edit_general($User);
+        if (!empty($_POST)) {
+            $User->member->values($_POST);
+            try {
+                if ($User->member->check()) {
+                    $User->member->update_member($_POST);
+                    $this->template->ok = true;
+                }
+                else {
+                    $this->errors = $User->member->validate()->errors();
+                }
+            }
+            catch (ORM_Validation_Exception $ex) {
+                $this->errors = $ex->errors('');
+            }
+        }
     }
 
     private function edit_general($User) {
