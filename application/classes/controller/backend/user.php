@@ -91,6 +91,23 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $this->template->User = $User;
     }
 
+    public function action_switch() {
+        $User = new Model_User($this->request->param('id'));
+        if ($User->loaded()) {
+            $User->active = !$User->active;
+            $User->save();
+        }
+        $this->request->redirect('backend/user/list');
+    }
+
+    public function action_delete() {
+        $User = new Model_User($this->request->param('id'));
+        if ($User->loaded()) {
+            $User->delete($User);
+        }
+        $this->request->redirect('backend/user/list');
+    }
+
     public function action_edit()
     {
         $role = ORM::factory('role');
