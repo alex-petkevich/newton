@@ -84,6 +84,7 @@ class Model_Auth_User extends ORM {
 			'username'         => 'username',
 			'email'            => 'email address',
 			'password'         => 'password',
+            'active'           => 'active'
 		);
 	}
 

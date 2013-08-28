@@ -14,7 +14,9 @@
         <label for="password_confirm">{__('Confirm password')}:</label>
         <input type="password" name="_external[password_confirm]" value="" id="password_confirm" />
         <br />
-
+        <label for="active">{__('User is active')}:</label>
+        <input type="checkbox" name="active" value="1" id="active"{if $User->active == 1} checked="checked"{/if} />
+    
         <div align="center">
             <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
             <input type="Submit" name="subm" value="{__('Save')}" />

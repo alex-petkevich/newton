@@ -15,17 +15,23 @@
             {foreach from=$users item=usr}
             {assign var=roles value=$usr->roles->find_all()->as_array()}
             <tr>
-                <td class="a-center">{$usr->id}</td>
-                <td><a href="#"><a href="{URL::base()}backend/user/edit/{$usr->id}">{$usr->username}</a></a></td>
-                <td>{$usr->email}</td>
-                <td>{foreach from=$roles item=role}{$role->name}&nbsp;{/foreach}</td>
-                <td>{$usr->member->zip}</td>
-                <td>{date('Y-m-d H:i:s',$usr->member->added)}</td>
-                <td class="table-icons"><a href="{URL::base()}backend/user/edit/{$usr->id}"><img
-    src="{URL::base()}static/img/backend/icons/page_white_edit.png" title="{__('Edit')}" width="16" height="16"
-    /></a><a href="{URL::base()}backend/user/delete/{$usr->id}"><img
-    src="{URL::base()}static/img/backend/icons/page_white_delete.png" title="{__('Delete user')}" width="16" height="16"
-    /></a></td>
+                <td class="a-center{if !$usr->active} gry{/if}">{$usr->id}</td>
+                <td class="{if !$usr->active} gry{/if}"><a href="#"><a href="{URL::base()}backend/user/edit/{$usr->id}">{$usr->username}</a></a></td>
+                <td class="{if !$usr->active} gry{/if}">{$usr->email}</td>
+                <td class="{if !$usr->active} gry{/if}">{foreach from=$roles item=role key=Ky}{$role->name}{if $Ky < count($roles)-1},&nbsp;{/if}{/foreach}</td>
+                <td class="{if !$usr->active} gry{/if}">{$usr->member->zip}</td>
+                <td class="{if !$usr->active} gry{/if}">{date('Y-m-d H:i:s',$usr->member->added)}</td>
+                <td  class="table-icons{if !$usr->active} gry{/if}">
+                    <a href="{URL::base()}backend/user/switch/{$usr->id}"><img
+                                src="{URL::base()}static/img/backend/icons/user.png" title="{__('Switch active status')}" width="16" height="16"
+                                /></a>
+                    <a href="{URL::base()}backend/user/edit/{$usr->id}"><img
+    src="{URL::base()}static/img/backend/icons/user_edit.png" title="{__('Edit')}" width="16" height="16"
+    /></a>
+                    <a href="{URL::base()}backend/user/delete/{$usr->id}"><img
+    src="{URL::base()}static/img/backend/icons/user_delete.png" title="{__('Delete user')}" width="16" height="16"
+    /></a>
+                </td>
             </tr>
             {/foreach}
         </tbody>

@@ -11,7 +11,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
          $this->request->redirect('/backend/main');
       if (isset($_POST) && Valid::not_empty($_POST)) {
          $remember = isset($_POST['remember']) && $_POST['remember'];
-         if (Auth::instance()->login($_POST['username'], $_POST['password'], $remember)) {
+         if (Auth::instance()->login($_POST['username'], $_POST['password'], $remember) && Auth::instance()->get_user()->active) {
             if (Session::instance()->get('REDIRECT_URL')) {
                $url = Session::instance()->get('REDIRECT_URL');
                Session::instance()->delete('REDIRECT_URL');
@@ -212,6 +212,9 @@ class Controller_Backend_User extends Controller_Backend_Backend
 
     private function edit_general($User) {
         if (!empty($_POST)) {
+            if (!isset($_POST['active'])) {
+                $_POST['active'] = 0;
+            }
             $User->values($_POST);
             try {
                 if ($User->check()) {
