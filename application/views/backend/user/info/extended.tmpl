@@ -15,8 +15,31 @@
         Female
         <br />
         <label for="added">{__('Date added')}:</label>
-        <input type="text" name="added" value="{$User->member->added}" id="added" />
+        <input type="text" name="added" value="{$User->member->added|date_format:"%Y-%m-%d"}" id="added" />
+    
         <br />
+        {if isset($errors['zip'])}<div class="error">{$errors['zip']}</div>{/if}
+        <label for="zip">{__('Zip code')}:</label>
+        <input type="text" name="zip" value="{$User->member->zip}" id="zip" />
+        <br />
+        {if isset($errors['address1'])}<div class="error">{$errors['address1']}</div>{/if}
+        <label for="address1">{__('Address 1')}:</label>
+        <input type="text" name="address1" value="{$User->member->address1}" id="address1" />
+        <br />
+        {if isset($errors['address2'])}<div class="error">{$errors['address2']}</div>{/if}
+        <label for="address2">{__('Address 2')}:</label>
+        <input type="text" name="address2" value="{$User->member->address2}" id="address2" />
+        <br />
+        {if isset($errors['phone'])}<div class="error">{$errors['phone']}</div>{/if}
+        <label for="phone">{__('Phone')}:</label>
+        <input type="text" name="phone" value="{$User->member->phone}" id="phone" />
+        <br />
+        {if isset($errors['fax'])}<div class="error">{$errors['fax']}</div>{/if}
+        <label for="fax">{__('Fax')}:</label>
+        <input type="text" name="fax" value="{$User->member->fax}" id="fax" />
+        <br />
+        <label for="birthdate">{__('Birthdate')}:</label>
+        <input type="text" name="birthdate" value="{$User->member->birthdate|date_format:"%Y-%m-%d"}" id="birthdate" />
 
         <div align="center">
             <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
@@ -25,3 +48,7 @@
         </div>
     <input type="hidden" name="type" value="extended"/>
 </form>
+<script type="text/javascript">
+    $("#added").datepicker({ dateFormat: 'yy-mm-dd' });
+    $("#birthdate").datepicker({ dateFormat: 'yy-mm-dd',changeMonth: true, changeYear: true });
+</script>

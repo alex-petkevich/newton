@@ -1,0 +1,16 @@
+<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
+
+
+    <br />
+    {if isset($errors['notes'])}<div class="error">{$errors['notes']}</div>{/if}
+    <label for="notes">{__('Notes')}:</label>
+    <textarea name="notes" id="notes">{$User->member->notes}</textarea>
+
+    
+    <div align="center">
+        <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
+        <input type="Submit" name="subm" value="{__('Save')}" />
+        <br />
+    </div>
+    <input type="hidden" name="type" value="notes"/>
+</form>
