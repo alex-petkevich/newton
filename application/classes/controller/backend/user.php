@@ -113,6 +113,9 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $role = ORM::factory('role');
         $User = new Model_User($this->request->param('id'));
         $type = (isset($_POST['type']) ? $_POST['type'] : 'general');
+        $membertype = ORM::factory('membertype');
+        $this->template->types = $membertype->find_all();
+
         switch($type) {
             case "extended" :
                 $this->edit_extended($User);

@@ -1,4 +1,13 @@
 <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
+        {if isset($errors['type'])}<div class="error">{$errors['type']}</div>{/if}
+        <label for="type">{__('Account type')}:</label>
+        <select name="type_id" id="type_id">
+            <option value="0">--</option>
+            {foreach from=$types item=type}
+                <option value="{$type->id}"{if $User->member->type->id == $type->id} selected="selected"{/if}>{$type->title}</option>
+            {/foreach}
+        </select>
+    <br />   <br />
         {if isset($errors['firstname'])}<div class="error">{$errors['firstname']}</div>{/if}
         <label for="firstname">{__('First name')}:</label>
         <input type="text" name="firstname" value="{$User->member->firstname}" id="firstname" />

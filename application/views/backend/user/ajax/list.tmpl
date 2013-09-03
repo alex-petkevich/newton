@@ -20,7 +20,7 @@
                 <td class="{if !$usr->active} gry{/if}">{$usr->email}</td>
                 <td class="{if !$usr->active} gry{/if}">{foreach from=$roles item=role key=Ky}{$role->name}{if $Ky < count($roles)-1},&nbsp;{/if}{/foreach}</td>
                 <td class="{if !$usr->active} gry{/if}">{$usr->member->zip}</td>
-                <td class="{if !$usr->active} gry{/if}">{date('Y-m-d H:i:s',$usr->member->added)}</td>
+                <td class="{if !$usr->active} gry{/if}">{$usr->member->added|date_format:"d.m.Y H.i.s"}</td>
                 <td  class="table-icons{if !$usr->active} gry{/if}">
                     <a href="{URL::base()}backend/user/switch/{$usr->id}"><img
                                 src="{URL::base()}static/img/backend/icons/user.png" title="{__('Switch active status')}" width="16" height="16"
