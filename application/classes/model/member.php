@@ -6,6 +6,14 @@ class Model_Member extends ORM {
             'model' => 'membertype',
             'foreign_key' => 'type_id',
         ),
+        'country' => array(
+            'model' => 'country',
+            'foreign_key' => 'country_id',
+        ),
+        'region' => array(
+            'model' => 'region',
+            'foreign_key' => 'region_id',
+        ),
     );
 
     public function rules()

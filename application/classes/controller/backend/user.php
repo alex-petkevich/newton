@@ -113,8 +113,9 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $role = ORM::factory('role');
         $User = new Model_User($this->request->param('id'));
         $type = (isset($_POST['type']) ? $_POST['type'] : 'general');
-        $membertype = ORM::factory('membertype');
-        $this->template->types = $membertype->find_all();
+        $this->template->types = ORM::factory('membertype')->find_all();
+        $this->template->countries = ORM::factory('country')->order_by('priority','desc')->order_by('title')->find_all();
+        $this->template->regions = ORM::factory('region')->find_all();
 
         switch($type) {
             case "extended" :

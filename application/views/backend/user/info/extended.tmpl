@@ -1,6 +1,6 @@
 <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
-        {if isset($errors['type'])}<div class="error">{$errors['type']}</div>{/if}
-        <label for="type">{__('Account type')}:</label>
+        {if isset($errors['type_id'])}<div class="error">{$errors['type']}</div>{/if}
+        <label for="type_id">{__('Account type')}:</label>
         <select name="type_id" id="type_id">
             <option value="0">--</option>
             {foreach from=$types item=type}
@@ -25,9 +25,43 @@
         <br />
         <label for="added">{__('Date added')}:</label>
         <input type="text" name="added" value="{$User->member->added|date_format:"%Y-%m-%d"}" id="added" />
-    
         <br />
-        {if isset($errors['zip'])}<div class="error">{$errors['zip']}</div>{/if}
+        <br />
+        {if isset($errors['country_id'])}<div class="error">{$errors['country_id']}</div>{/if}
+        <label for="country_id">{__('Country')}:</label>
+        <select name="country_id" id="country_id">
+            <option value="0">--</option>
+            {foreach from=$countries item=country}
+                <option value="{$country->id}"{if $User->member->country->id == $country->id} selected="selected"{/if}>{$country->title}</option>
+            {/foreach}
+        </select>
+        <br/>
+        {if isset($errors['region_id'])}<div class="error">{$errors['region_id']}</div>{/if}
+        <label for="region_id">{__('Region')}:</label>
+        <select name="region_id" id="region_id">
+            <option value="0">--</option>
+        </select>
+        <br/>
+<script type="text/javascript">{strip}
+    $('#country_id').on('change',function() { 
+        if ($(this).val()=='0') { 
+            $("#region_id").attr("disabled","disabled");
+        } else { 
+            $("#region_id").attr("disabled","");
+        }
+        $('#region_id').empty();
+        $("#region_id").append( $('<option value="0">--</option>'));
+        {foreach from=$countries item=country}
+        if ($(this).val()=='{$country->id}') { 
+            {foreach from=$country->regions item=region}
+                $("#region_id").append( $('<option value="{$region->id}">{$region->title}</option>'));
+            {/foreach}
+        } 
+        {/foreach}
+    });
+    $('#country_id').change();{/strip}
+</script>
+    {if isset($errors['zip'])}<div class="error">{$errors['zip']}</div>{/if}
         <label for="zip">{__('Zip code')}:</label>
         <input type="text" name="zip" value="{$User->member->zip}" id="zip" />
         <br />
