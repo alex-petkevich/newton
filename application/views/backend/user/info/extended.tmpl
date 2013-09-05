@@ -37,29 +37,42 @@
         </select>
         <br/>
         {if isset($errors['region_id'])}<div class="error">{$errors['region_id']}</div>{/if}
-        <label for="region_id">{__('Region')}:</label>
+        <label for="region_id" id="region_id_lbl">{__('Region')}:</label>
         <select name="region_id" id="region_id">
             <option value="0">--</option>
         </select>
         <br/>
-<script type="text/javascript">{strip}
+<script type="text/javascript">
+    {strip}
     $('#country_id').on('change',function() { 
-        if ($(this).val()=='0') { 
+        if ($("#country_id :selected").val()=='0') { 
             $("#region_id").attr("disabled","disabled");
         } else { 
-            $("#region_id").attr("disabled","");
+            $("#region_id").attr("disabled",false);
         }
         $('#region_id').empty();
         $("#region_id").append( $('<option value="0">--</option>'));
         {foreach from=$countries item=country}
-        if ($(this).val()=='{$country->id}') { 
-            {foreach from=$country->regions item=region}
+        if ($("#country_id :selected").val()=='{$country->id}') { 
+            {assign var=regions value=$country->regions->find_all()}
+            {if count($regions) > 0}
+                $("#region_id").show();
+                $("#region_id_lbl").show();
+            {foreach from=$regions item=region}
                 $("#region_id").append( $('<option value="{$region->id}">{$region->title}</option>'));
             {/foreach}
+            {else}
+                $("#region_id").hide();
+                $("#region_id_lbl").hide();
+            {/if}
         } 
         {/foreach}
     });
-    $('#country_id').change();{/strip}
+    $('#country_id').change();
+    {if $User->member->region->id}
+    $("#region_id [value='{$User->member->region->id}']").attr("selected", "selected");
+    {/if}
+    {/strip}
 </script>
     {if isset($errors['zip'])}<div class="error">{$errors['zip']}</div>{/if}
         <label for="zip">{__('Zip code')}:</label>

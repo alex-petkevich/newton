@@ -115,7 +115,6 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $type = (isset($_POST['type']) ? $_POST['type'] : 'general');
         $this->template->types = ORM::factory('membertype')->find_all();
         $this->template->countries = ORM::factory('country')->order_by('priority','desc')->order_by('title')->find_all();
-        $this->template->regions = ORM::factory('region')->find_all();
 
         switch($type) {
             case "extended" :
