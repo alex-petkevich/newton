@@ -2,7 +2,9 @@
 
 {block name="content"}
         <div id="box">
-                <h3>{__('Groups')}</h3>
+                <h3 class="reallynow"><span>{__('Groups')}</span>
+                    <a href="{URL::base()}backend/user/addgroup" class="add">{__('Add group')}</a>
+                    <div class="clb"></div></h3>
                 <div class="reloadPart">
                     {include file="./ajax/groups.tmpl"}
                 </div>

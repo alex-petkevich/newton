@@ -94,7 +94,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
     public function action_switch() {
         $User = new Model_User($this->request->param('id'));
         if ($User->loaded()) {
-            $User->active = !$User->active;
+            $User->active = (int)!$User->active;
             $User->save();
         }
         $this->request->redirect('backend/user/list');

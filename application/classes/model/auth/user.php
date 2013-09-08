@@ -47,7 +47,7 @@ class Model_Auth_User extends ORM {
 				array('not_empty'),
 			),
             'active' => array(
-                array('logical'),
+                array('digit'),
             ),
 			'email' => array(
 				array('not_empty'),
