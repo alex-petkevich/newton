@@ -3,7 +3,6 @@
 
     <br />
     {if isset($errors['notes'])}<div class="error">{$errors['notes']}</div>{/if}
-    <label for="notes">{__('Notes')}:</label>
     <textarea name="notes" id="notes">{$User->member->notes}</textarea>
 
     

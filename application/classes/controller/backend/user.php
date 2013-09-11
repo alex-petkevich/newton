@@ -121,6 +121,10 @@ class Controller_Backend_User extends Controller_Backend_Backend
                 $this->edit_extended($User);
                 $this->template->type = 2;
             break;
+            case "notes" :
+                $this->edit_notes($User);
+                $this->template->type = 3;
+                break;
             case "groups" :
                 $this->edit_groups($User);
                 $this->template->type = 1;
@@ -215,7 +219,8 @@ class Controller_Backend_User extends Controller_Backend_Backend
     private function edit_extended($User) {
         if (!empty($_POST)) {
             $User->member->values($_POST);
-            try {
+            $User->member->user_id = $User->id;
+            try {//Debug::dump($_POST);
                 if ($User->member->check()) {
                     $User->member->update_member($_POST);
                     $this->template->ok = true;
@@ -227,6 +232,16 @@ class Controller_Backend_User extends Controller_Backend_Backend
             catch (ORM_Validation_Exception $ex) {
                 $this->errors = $ex->errors('');
             }
+        }
+    }
+
+    private function edit_notes($User) {
+        if (!empty($_POST)) {
+            $User->member->user_id = $User->id;
+            $User->member->notes = $_POST['notes'];
+            $User->member->validation_required(false);
+            $User->member->save();
+            $this->template->ok = true;
         }
     }
 

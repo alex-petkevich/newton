@@ -2,7 +2,7 @@
 
 {block name='content'}
 <div id="box">
-    <h3>{__('Edit user')}</h3>
+    <h3>{__('Edit user')} {$User->username}</h3>
     {if isset($ok)}<div class="ok">{__('Operation completed successfully')}</div>{/if}
 
     <div id="tabs">

@@ -23,6 +23,7 @@
         <input type="radio" name="gender" value="0" {if $User->member->gender == '0'} checked="checked" {/if}id="gender2" />
         Female
         <br />
+        {if isset($errors['added'])}<div class="error">{$errors['added']}</div>{/if}
         <label for="added">{__('Date added')}:</label>
         <input type="text" name="added" value="{$User->member->added|date_format:"%Y-%m-%d"}" id="added" />
         <br />
@@ -30,7 +31,7 @@
         {if isset($errors['country_id'])}<div class="error">{$errors['country_id']}</div>{/if}
         <label for="country_id">{__('Country')}:</label>
         <select name="country_id" id="country_id">
-            <option value="0">--</option>
+            <option value="">--</option>
             {foreach from=$countries item=country}
                 <option value="{$country->id}"{if $User->member->country->id == $country->id} selected="selected"{/if}>{$country->title}</option>
             {/foreach}
@@ -94,6 +95,7 @@
         <label for="fax">{__('Fax')}:</label>
         <input type="text" name="fax" value="{$User->member->fax}" id="fax" />
         <br />
+        {if isset($errors['birthdate'])}<div class="error">{$errors['birthdate']}</div>{/if}
         <label for="birthdate">{__('Birthdate')}:</label>
         <input type="text" name="birthdate" value="{$User->member->birthdate|date_format:"%Y-%m-%d"}" id="birthdate" />
 
