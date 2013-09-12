@@ -109,7 +109,7 @@ Kohana::modules(array(
      'storage'    => MODPATH.'storage',   
      'developerbar'    => MODPATH.'developerbar',   // Developer Bar
      'email'    => MODPATH.'email',   
-     'paginate'    => MODPATH.'paginate',   
+     'pagination'    => MODPATH.'pagination',   
      	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));

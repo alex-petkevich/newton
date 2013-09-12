@@ -1,5 +1,11 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Class Controller_Backend_User
+ * 
+ * @TODO users search
+ * @TODO add avatar
+ */
 class Controller_Backend_User extends Controller_Backend_Backend
 {
 
@@ -58,9 +64,20 @@ class Controller_Backend_User extends Controller_Backend_Backend
             break;
       }
       $dir = ($this->request->query('desc') ? "desc" : "asc");
+        
       $user = ORM::factory('user');
-      $this->template->users = $user->order_by($order, $dir)->find_all();
+      $count = $user->count_all();
+      $pagination = Pagination::factory(array('total_items' => $count));
+       
+      $this->template->users = $user->order_by($order, $dir)
+                                    ->limit($pagination->items_per_page)
+                                    ->offset($pagination->offset)
+                                    ->find_all();
+       
       $this->template->sort = array('order' => $order, 'dir' => $dir);
+      $this->template->pagination = $pagination;
+
+     
    }
 
 
@@ -76,8 +93,11 @@ class Controller_Backend_User extends Controller_Backend_Backend
                         'password',
                         'email',
                     ));
+                    $this->create_default_member($User);
+                    $User->add('roles', ORM::factory('role')->where('name', '=', 'login')->find());
+                    $User->add('roles', ORM::factory('role')->where('name', '=', 'members')->find());
 
-                    $this->request->redirect('backend/user/list/0/ok');
+                    $this->request->redirect('backend/user/edit/'.$User->id);
                 }
                 else {
                     $this->errors = $User->validate()->errors();
@@ -89,6 +109,13 @@ class Controller_Backend_User extends Controller_Backend_Backend
         }
 
         $this->template->User = $User;
+    }
+    
+    private function create_default_member($User) {
+        $User->member->user_id = $User->id;
+        $User->member->added = date("Y-m-d H:i:s");
+        $User->member->validation_required(false);
+        $User->member->save();
     }
 
     public function action_switch() {
