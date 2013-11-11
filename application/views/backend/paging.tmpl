@@ -1,15 +1,1 @@
-{if isset($Paginator) && $Paginator.pages > 0}
-<div id="pager">
-                        Page <a href="#"><img src="{URL::base()}static/backend/img/icons/arrow_left.gif" width="16" height="16" /></a> 
-                        <input size="1" value="1" type="text" name="page" id="page" /> 
-                        <a href="#"><img src="{URL::base()}static/backend/img/icons/arrow_right.gif" width="16" height="16" /></a>of 42
-                    pages | View <select name="view">
-                                    <option>10</option>
-                                    <option>20</option>
-                                    <option>50</option>
-                                    <option>100</option>
-                                </select> 
-                    per page | Total <strong>420</strong> records found
-                    </div>
-                    
-{/if}
+{$pagination}
