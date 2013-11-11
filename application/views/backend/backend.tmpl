@@ -22,7 +22,7 @@
               </ul>
           </div>
       </div>
-      {if count($SubMenu)}
+      {if count($SubMenu) && Auth::instance()->logged_in('backend')}
        <div id="top-panel">
             <div id="panel">
                 <ul>
