@@ -2,6 +2,7 @@ $(function() {
 	// bind tables ordering
 	bindAutoReload();
 	bindCancelButtons();
+    bindFilterPanel();
 });
 
 
@@ -30,6 +31,14 @@ function bindAutoReload() {
 		});
 		return false;
 	});
+}
+
+function bindFilterPanel() {
+    if ($('.filterForm').length ) {
+        $('#switchFilter').on('click',function(evt){
+            $('.filterForm').toggle('slow');   
+        });
+    }
 }
 
 function bindCancelButtons() {

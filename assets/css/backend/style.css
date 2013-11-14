@@ -374,6 +374,16 @@ form{
 .reallynow {
     
 }
+.pagination {
+    display: inline;
+}
+.pagination-box {
+    padding: 5px;
+}
+.filterForm {
+    padding: 10px; 
+    display: none;
+}
 /*********************
 	Icons
 *********************/

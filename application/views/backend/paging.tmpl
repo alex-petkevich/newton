@@ -1,1 +1,4 @@
-{$pagination}
+{if isset($pagination)} <div class="pagination-box">
+    {__('Pages')}: {$pagination}
+</div>
+{/if}

@@ -4,7 +4,11 @@
         <div id="box">
                 <h3 class="reallynow"><span>{__('Users')}</span>
                     <a href="{URL::base()}backend/user/add" class="add">{__('Add user')}</a>
+                    <a href="javascript:;" id="switchFilter">{__('Find user')}</a>
                     <div class="clb"></div></h3>
+                <div class="filterForm">
+                    <b>Filter by:</b> 
+                </div>
                 <div class="reloadPart">
                     {include file="./ajax/list.tmpl"}
                 </div>

@@ -67,7 +67,10 @@ class Controller_Backend_User extends Controller_Backend_Backend
         
       $user = ORM::factory('user');
       $count = $user->count_all();
-      $pagination = Pagination::factory(array('total_items' => $count));
+      $pagination = Pagination::factory(array('total_items' => $count))->route_params(array(
+          'controller' => Request::current()->controller(),
+          'action' => Request::current()->action(),
+      ));
 
       $this->template->users = $user->order_by($order, $dir)
                                     ->limit($pagination->items_per_page)
@@ -77,7 +80,6 @@ class Controller_Backend_User extends Controller_Backend_Backend
       $this->template->sort = array('order' => $order, 'dir' => $dir);
       $this->template->pagination = $pagination;
 
-     
    }
 
 

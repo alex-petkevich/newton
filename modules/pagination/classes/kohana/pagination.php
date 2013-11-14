@@ -62,23 +62,25 @@ class Kohana_Pagination {
 	// Parameters to use with Route to create URIs
 	protected $_route_params = array();
 
-	/**
-	 * Creates a new Pagination object.
-	 *
-	 * @param   array  configuration
-	 * @return  Pagination
-	 */
+    /**
+     * Creates a new Pagination object.
+     *
+     * @param array $config configuration
+     * @param Request $request
+     * @return  Pagination
+     */
 	public static function factory(array $config = array(), Request $request = NULL)
 	{
 		return new Pagination($config, $request);
 	}
 
-	/**
-	 * Creates a new Pagination object.
-	 *
-	 * @param   array  configuration
-	 * @return  void
-	 */
+    /**
+     * Creates a new Pagination object.
+     *
+     * @param array $config configuration
+     * @param Request $request
+     * @return \Kohana_Pagination
+     */
 	public function __construct(array $config = array(), Request $request = NULL)
 	{
 		// Overwrite system defaults with application defaults
