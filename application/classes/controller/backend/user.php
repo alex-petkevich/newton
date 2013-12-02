@@ -71,7 +71,8 @@ class Controller_Backend_User extends Controller_Backend_Backend
           'controller' => Request::current()->controller(),
           'action' => Request::current()->action(),
       ));
-
+       
+      $filter = $user->prepare_filter($this->request->post('filter'));
       $this->template->users = $user->order_by($order, $dir)
                                     ->limit($pagination->items_per_page)
                                     ->offset($pagination->offset)
@@ -79,7 +80,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
        
       $this->template->sort = array('order' => $order, 'dir' => $dir);
       $this->template->pagination = $pagination;
-
+      $this->template->filter = $filter;
    }
 
 

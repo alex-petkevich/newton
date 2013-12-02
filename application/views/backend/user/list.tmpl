@@ -6,8 +6,13 @@
                     <a href="{URL::base()}backend/user/add" class="add">{__('Add user')}</a>
                     <a href="javascript:;" id="switchFilter">{__('Find user')}</a>
                     <div class="clb"></div></h3>
-                <div class="filterForm">
-                    <b>Filter by:</b> 
+                <div class="filterForm"{if isset($filter['apply'])} style="display: block;" {/if}>
+                    <form name="filter" class="form" method="post" action="{URL::site('backend/user')}/{Request::current()->action()}">
+                        <b>Filter by:</b> 
+                        Username: <input type="text" name="filter[username]" value="{$filter.username|default:''}" />
+                        <input type="submit" name="filter[apply]" value="{__('Apply')}" />
+                        <input type="submit" name="filter[clear]" value="{__('Clear')}" />
+                        </form>
                 </div>
                 <div class="reloadPart">
                     {include file="./ajax/list.tmpl"}
