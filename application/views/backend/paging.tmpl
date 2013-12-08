@@ -1,4 +1,5 @@
-{if isset($pagination)} <div class="pagination-box">
+{if isset($pagination) && $pagination->total_pages > 1} 
+<div class="pagination-box">
     {__('Pages')}: {$pagination}
 </div>
 {/if}

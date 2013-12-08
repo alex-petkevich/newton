@@ -384,6 +384,11 @@ form{
     padding: 10px; 
     display: none;
 }
+.not-found {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0 30px 0;
+}
 /*********************
 	Icons
 *********************/

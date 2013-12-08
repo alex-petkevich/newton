@@ -145,15 +145,14 @@
 	 */
 	
 	// REQUIRED - Root path to work within
-	$config['local']['root_path']	=
-$_SERVER['DOCUMENT_ROOT'].'static/files/';
+	$config['local']['root_path']	= $_SERVER['DOCUMENT_ROOT'];
 	
 	// RECOMMENDED - Public URL. When not defined, Storage_Native::url returns FALSE
 	$config['local']['url']			= '/static/files/';
 	
 	// OPTIONAL - Prefix path with additional pathing - be sure to include trailing slash "/"
 	// If left empty, media will be written to root.
-	$config['local']['directory']	= NULL;
+	$config['local']['directory']	= 'static/files/';
 	
 	/**
 	 * Unit Testing

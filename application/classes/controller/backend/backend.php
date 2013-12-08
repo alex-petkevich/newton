@@ -89,6 +89,25 @@ class Controller_Backend_Backend extends Controller_Template {
 
             ->js_block("window.asset_merger = true;");
     }
-    
+
+    protected function prepare_filter($filter) {
+
+        $t = debug_backtrace();
+        $key_name = $t[1]["class"]."_".$t[1]["function"];
+
+        if (isset($filter['clear'])) {
+            Session::instance()->delete($key_name);
+            return array();
+        }
+        
+        if ($filter['apply']) {
+            Session::instance()->set($key_name,$filter);
+        }
+        
+        return Session::instance()->get($key_name,array());
+    }
+
+
+
 }
  

@@ -216,13 +216,4 @@ class Model_Auth_User extends ORM {
 		return $this->values($values, $expected)->update($extra_validation);
 	}
     
-    public function prepare_filter($filter) {
-        
-        if (isset($filter['clear'])) {
-            return array();
-        }
-        ///Debug::dump(Session::instance()->as_array());
-        return $filter;
-    }
-
 } // End Auth User Model
