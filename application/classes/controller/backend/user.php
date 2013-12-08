@@ -135,6 +135,10 @@ class Controller_Backend_User extends Controller_Backend_Backend
         }
         $this->request->redirect('backend/user/list');
     }
+    
+    private function load_avatar($User) {
+
+    }
 
     public function action_edit()
     {
@@ -156,6 +160,10 @@ class Controller_Backend_User extends Controller_Backend_Backend
             case "groups" :
                 $this->edit_groups($User);
                 $this->template->type = 1;
+                break;
+            case "avatar" :
+                $this->load_avatar($User);
+                $this->template->type = 4;
                 break;
             default:
                 $this->edit_general($User);

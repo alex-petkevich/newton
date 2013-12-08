@@ -1,0 +1,14 @@
+<form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}" enctype="multipart/form-data">
+
+    {if isset($errors['avatar'])}<div class="error">{$errors['avatar']}</div>{/if}
+    {__('Load avatar')}: <input type="file" name="avatar" id="avatar">
+
+
+    <div align="center">
+        <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
+        <input type="Submit" name="subm" value="{__('Save')}" />
+        <br />
+    </div>
+    <input type="hidden" name="type" value="avatar"/>
+
+</form>
