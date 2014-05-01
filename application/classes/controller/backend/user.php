@@ -137,7 +137,54 @@ class Controller_Backend_User extends Controller_Backend_Backend
     }
     
     private function load_avatar($User) {
+        if ($this->request->method() == Request::POST)
+        {
+            if (isset($_FILES['avatar']))
+            {
+                $filename = $this->_save_image($_FILES['avatar'],$User->id);
+            }
+        }
+        if ( ! $filename)
+        {
+            $this->errors['filename'] = I18n::get('There was a problem while uploading the image. Make sure it is uploaded and must be JPG/PNG/GIF file.');
+        }
+        $File = new Model_Memberfiles();
+        $File->member = $User->member;
+        $File->type = 'avatar';
+        $File->filename = $filename;
 
+        $File->save();
+    }
+
+    protected function _save_image($image,$id)
+    {
+        if (
+            ! Upload::valid($image) OR
+            ! Upload::not_empty($image) OR
+            ! Upload::type($image, array('jpg', 'jpeg', 'png', 'gif')))
+        {
+            return FALSE;
+        }
+
+        if ($file = Upload::save($image, NULL, sys_get_temp_dir()))
+        {
+            $filename = $id.'_'.$image['name'];
+            $tempfile = sys_get_temp_dir() . DIRECTORY_SEPARATOR  . $filename;
+
+            Image::factory($file)
+                ->resize(200, 200, Image::AUTO)
+                ->save($tempfile);
+
+            $storage = Storage::factory();
+            $storage->set('user/avatar/'.$filename, $tempfile, TRUE);
+            
+            // Delete the temporary file
+            unlink($file);
+
+            return $filename;
+        }
+
+        return FALSE;
     }
 
     public function action_edit()
@@ -169,6 +216,8 @@ class Controller_Backend_User extends Controller_Backend_Backend
                 $this->edit_general($User);
                 $this->template->type = 0;
         }
+        // get avatar
+        
         $this->template->Groups = $role->find_all();
         $this->template->User = $User;
         $this->template->Roles = $User->roles->find_all()->as_array();

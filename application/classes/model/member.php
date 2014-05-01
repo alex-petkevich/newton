@@ -15,6 +15,13 @@ class Model_Member extends ORM {
             'foreign_key' => 'region_id',
         ),
     );
+    
+    protected $_has_many = array(
+        'files' => array(
+            'model' => 'memberfiles',
+            'foreign_key' => 'member_id'
+        ),
+    );
 
     protected $_validation_required = TRUE;
 

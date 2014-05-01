@@ -152,7 +152,7 @@
 	
 	// OPTIONAL - Prefix path with additional pathing - be sure to include trailing slash "/"
 	// If left empty, media will be written to root.
-	$config['local']['directory']	= 'static/files/';
+	$config['local']['directory']	= '/static/files/';
 	
 	/**
 	 * Unit Testing
