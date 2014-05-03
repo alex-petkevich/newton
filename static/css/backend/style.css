@@ -305,6 +305,17 @@ form{
 	padding-right:10px;
 	margin-bottom:5px;
 }
+
+.clean label {
+    clear:none;
+    float:none;
+    width:auto;
+    display: inline;
+    text-align: left ;
+    padding-right:0px;
+    margin-bottom:0px;
+}
+
 .form input {
 	padding:3px;
 	margin-bottom:5px;

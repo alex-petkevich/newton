@@ -148,7 +148,7 @@
 	$config['local']['root_path']	= $_SERVER['DOCUMENT_ROOT'];
 	
 	// RECOMMENDED - Public URL. When not defined, Storage_Native::url returns FALSE
-	$config['local']['url']			= '/static/files/';
+	$config['local']['url']			= 'newton';
 	
 	// OPTIONAL - Prefix path with additional pathing - be sure to include trailing slash "/"
 	// If left empty, media will be written to root.

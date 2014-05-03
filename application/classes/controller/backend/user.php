@@ -35,17 +35,6 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $this->request->redirect('/backend/user/login');
     }
 
-    public function action_register()
-    {
-        $client = ORM::factory('user');
-        $client->email = "admin@my.loc";
-        $client->username = "admin";
-        $client->password = "admin";
-        $client->save();
-        $client->add('roles', ORM::factory('role')->where('name', '=', 'login')->find());
-        $client->add('roles', ORM::factory('role')->where('name', '=', 'backend')->find());
-    }
-
     public function action_list()
     {
         $order = 'id';
@@ -139,21 +128,39 @@ class Controller_Backend_User extends Controller_Backend_Backend
     private function load_avatar($User) {
         if ($this->request->method() == Request::POST)
         {
-            if (isset($_FILES['avatar']))
+            if (isset($_FILES['avatar']) && $_FILES['avatar']['tmp_name'])
             {
                 $filename = $this->_save_image($_FILES['avatar'],$User->id);
             }
+            if ($this->request->post('ava_delete')) {
+                $File = $User->member->files->where('type','=',Model_Memberfiles::TYPE_AVATAR)->find();
+                if ($File->filename!='' ) {
+                    $storage = Storage::factory();
+                    $storage->delete('user/avatar/'.$File->filename);
+                }
+                if ($File->loaded())
+                    $File->delete($File);
+                $this->template->ok = true;
+                return true;
+            }
         }
-        if ( ! $filename)
+        if ( ! isset($filename))
         {
             $this->errors['filename'] = I18n::get('There was a problem while uploading the image. Make sure it is uploaded and must be JPG/PNG/GIF file.');
+            return false;
         }
-        $File = new Model_Memberfiles();
-        $File->member = $User->member;
-        $File->type = 'avatar';
-        $File->filename = $filename;
 
+        $File = $User->member->files->where('type','=',Model_Memberfiles::TYPE_AVATAR)->find();
+        if ($File->filename!='' ) {
+            $storage = Storage::factory();
+            $storage->delete('user/avatar/'.$File->filename);
+        }
+        $File->member = $User->member;
+        $File->type = Model_Memberfiles::TYPE_AVATAR;
+        $File->filename = $filename;
         $File->save();
+        $this->template->ok = true;
+
     }
 
     protected function _save_image($image,$id)
@@ -194,7 +201,7 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $type = (isset($_POST['type']) ? $_POST['type'] : 'general');
         $this->template->types = ORM::factory('membertype')->find_all();
         $this->template->countries = ORM::factory('country')->order_by('priority', 'desc')->order_by('title')->find_all();
-
+        
         switch ($type) {
             case "extended" :
                 $this->edit_extended($User);
@@ -221,6 +228,16 @@ class Controller_Backend_User extends Controller_Backend_Backend
         $this->template->Groups = $role->find_all();
         $this->template->User = $User;
         $this->template->Roles = $User->roles->find_all()->as_array();
+        $this->template->Avatar = $this->_get_avatar($User);
+    }
+    
+    private function _get_avatar($User) {
+        $files = $User->member->files->where('type','=',Model_Memberfiles::TYPE_AVATAR)->find()->as_array();
+        if (!$files['id'])
+            return '';
+        $storage = Storage::factory();
+        if ($storage->exists('user/avatar/'.$files['filename']))
+            return $storage->url('user/avatar/'.$files['filename']);
     }
 
     public function action_groups()

@@ -1,6 +1,8 @@
 <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}" enctype="multipart/form-data">
-
+    {if isset($errors['filename'])}<div class="error">{$errors['filename']}</div>{/if}
     {if isset($errors['avatar'])}<div class="error">{$errors['avatar']}</div>{/if}
+    
+    {if $Avatar!=''}<div class="clean"><img src="{$Avatar}?{$smarty.now}" /> <br /> <input type="checkbox" name="ava_delete" value="1" id="ava_del_id" > <label for="ava_del_id">{__('drop avatar')}</label> </div> {/if}
     {__('Load avatar')}: <input type="file" name="avatar" id="avatar">
 
 
