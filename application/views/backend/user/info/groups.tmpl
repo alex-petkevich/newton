@@ -1,10 +1,9 @@
 <form name="formLogin" method="post" class="form w400" action="{URL::site('backend/user/edit')}/{$User->id}">
-
-    {foreach from=$Groups item=Grp}
-        <input type="checkbox" name="group[]" value="{$Grp->id}" id="group_{$Grp->id}"{foreach from=$Roles item=role}{if $role->id == $Grp->id} checked="checked"{/if}{/foreach} />&nbsp;{$Grp->name}<br />
-    {/foreach}
-    
-    <br />
+    <div class="clean">
+        {foreach from=$Groups item=Grp}
+            <input type="checkbox" name="group[]" value="{$Grp->id}" id="group_{$Grp->id}"{foreach from=$Roles item=role}{if $role->id == $Grp->id} checked="checked"{/if}{/foreach} />&nbsp;<label for="group_{$Grp->id}"> {$Grp->name}</label> <br />
+        {/foreach}
+    </div>    
     <div align="center">
         <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
         <input type="Submit" name="subm" value="{__('Save')}" />

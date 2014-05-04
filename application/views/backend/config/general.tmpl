@@ -1,0 +1,22 @@
+{extends file='../backend.tmpl'}
+
+{block name='content'}
+<div id="box">
+    <h3>{__('General settings')}</h3>
+    {if isset($ok)}<div class="ok">{__('Operation completed successfully')}</div>{/if}
+    <form name="formConfig" method="post" class="form w400" action="{URL::site('backend/config/save')}">
+        {if isset($errors['firstname'])}<div class="error">{$errors['firstname']}</div>{/if}
+        <label for="firstname">{__('First name')}:</label>
+        <input type="text" name="firstname" value="" id="firstname" />
+        <br />
+        
+        <div align="center">
+            <input type="Button" name="" value="{__('Cancel')}" class="cancel_btn" rel="{URL::site('backend/user/list')}" />
+            <input type="Submit" name="subm" value="{__('Save')}" />
+            <br />
+        </div>
+        <input type="hidden" name="group_name" value="{$group_name}"/>
+
+    </form>
+
+{/block}

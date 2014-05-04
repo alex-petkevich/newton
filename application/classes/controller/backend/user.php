@@ -3,7 +3,6 @@
 /**
  * Class Controller_Backend_User
  *
- * @TODO add avatar
  */
 class Controller_Backend_User extends Controller_Backend_Backend
 {
